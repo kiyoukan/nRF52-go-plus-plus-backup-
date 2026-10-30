@@ -11,7 +11,7 @@
 
 | Item | Offset | Length | Notes |
 |---|---:|---:|---|
-| donor public BLE address | separate from external flash | `6` bytes | still required by repo |
+| donor public BLE address | internal `nRF52832` `UICR` `0x10001080` (separate from external flash) | `6` bytes | required; scan over BLE or see [`swd_mac_recovery.md`](swd_mac_recovery.md) |
 | selector 2 / cert block | `0x2006` | `0x100` | required |
 | selector 3 / key lane | `0x2106` | `0x10` | required |
 
