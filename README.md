@@ -9,6 +9,7 @@ the firmware, provide your own `pp_device_material.h` from a device you own.
 
 - nRF52 Arduino firmware under `code/nrf_emulator/pgpemu_nrf52_plusplus_exp`
 - a flash image reader under `tools/flash_image_reader`
+- a non-destructive SWD donor MAC reader under `tools/swd_mac_reader` (for dead/non-booting donor devices)
 - maintainer and protocol notes under `documentation`
 - `pp_device_material.template.h` as the public device-material template
 
@@ -66,9 +67,17 @@ python read_flash_data.py
 code/nrf_emulator/pgpemu_nrf52_plusplus_exp/pp_device_material.h
 ```
 
-The BLE address is not stored in the external flash image. You can read it from
-a working device with a normal Bluetooth scanner app or phone Bluetooth device
-info.
+The BLE address is not stored in the external flash image:
+
+- **Working donor device:** Read the address with a normal Bluetooth scanner app
+  or phone Bluetooth device info.
+- **Dead / non-booting donor device:** Recover the genuine Nintendo Public BLE
+  address over SWD from the donor `nRF52832` `UICR.CUSTOMER[0..1]` registers
+  (`0x10001080`–`0x10001087`) using [`tools/swd_mac_reader`](tools/swd_mac_reader/README.md)
+  or any SWD probe. Do **not** use `NRF_FICR->DEVICEADDR` (`0x100000A4`), which
+  is Nordic's unused Random Static silicon address and will fail Pokemon GO
+  certification. See [`documentation/swd_mac_recovery.md`](documentation/swd_mac_recovery.md)
+  for full wiring and instructions.
 
 ## Build
 
@@ -91,8 +100,9 @@ Before publishing your own fork, make sure these are not committed:
 
 ## Status
 
-Current firmware behavior is documented in:
+Current firmware behavior and donor recovery notes are documented in:
 
 - `documentation/firmware_module_reference.md`
 - `documentation/firmware_protocol_map.md`
 - `documentation/plusplus_backup_reference.md`
+- `documentation/swd_mac_recovery.md`

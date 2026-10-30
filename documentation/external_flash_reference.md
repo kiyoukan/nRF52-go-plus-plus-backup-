@@ -76,7 +76,7 @@ If the goal is to get behavior closer to the original donor device, this region 
 
 If a repo is already complete and only needs donor material plugged into it, the minimum useful readout set is:
 
-1. donor public BLE address
+1. donor public BLE address (scanned over BLE on a working donor, or read over SWD from internal `nRF52832` `UICR.CUSTOMER[0..1]` at `0x10001080` on a non-booting donor; see [`swd_mac_recovery.md`](swd_mac_recovery.md))
 2. `FBCT` selector 2 from `0x2006` length `0x100`
 3. `FBCT` selector 3 from `0x2106` length `0x10`
 

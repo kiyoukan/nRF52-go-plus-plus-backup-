@@ -1,5 +1,6 @@
 code/nrf_emulator/pgpemu_nrf52_plusplus_exp/pp_device_material.h
 code/nrf_emulator/pgpemu_nrf52_plusplus_exp/build/
+tools/swd_mac_reader/build/
 tools/flash_image_reader/input/*
 !tools/flash_image_reader/input/README.md
 tools/flash_image_reader/device_material_info.txt
